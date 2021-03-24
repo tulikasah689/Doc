@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+   Welcome to Devops World!! <br>
    The result is rendered here: <br>
    result : <%= request.getAttribute("result") %>
 </body>
