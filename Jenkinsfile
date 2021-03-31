@@ -43,7 +43,7 @@ pipeline {
             echo 'Uploading....'
                 rtMavenDeployer (
                     id: 'deployer-unique-id',
-                    serverId: 'artifactory-server',
+                    serverId: 'Artifactory',
                     releaseRepo: 'libs-release-local',
                     snapshotRepo: 'libs-release-local'
                 )
@@ -53,7 +53,7 @@ pipeline {
                 deployerId: 'deployer-unique-id'
                 )
                 rtPublishBuildInfo (
-                    serverId: 'artifactory-server'
+                    serverId: 'Artifactory'
                         )
             }
         }
