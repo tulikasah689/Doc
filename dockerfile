@@ -3,10 +3,10 @@
 FROM tomcat:latest
 
 # Give the Label
-LABEL maintainer = "Shilpa"
+LABEL maintainer = "shilpa bains"
 
 # Copy the war file 
-COPY /target/Firstweb-app.war /usr/local/tomcat/webapps/
+COPY /target/First-web-app.war /usr/local/tomcat/webapps/
 
 #On which port it will run
 EXPOSE 8095
