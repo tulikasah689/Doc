@@ -1,23 +1,11 @@
 pipeline {
-    agent any
-      environment
-    {
-        dockerImage = ''
-        registry='tulikasah689/our-web-app'
-        registryCredential='Docker_Hub'
-    }
-    tools
-    {
-        maven  'Maven3'
-        jdk 'JDK_NEW'
-    }
-   
+    agent any   
     stages {
         stage('Fetch')
         {
             steps
             {
-                git url : "https://github.com/tulikasah689/FirstMavenApp.git"
+                git url : "https://github.com/Shilpa40/MavenappSourceCode.git"
             }
         }
         stage('Build')
