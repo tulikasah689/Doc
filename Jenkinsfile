@@ -44,8 +44,8 @@ pipeline {
                 rtMavenDeployer (
                     id: 'deployer-unique-id',
                     serverId: 'Artifactory',
-                    releaseRepo: 'libs-release-local',
-                    snapshotRepo: 'libs-release-local'
+                    releaseRepo: 'example-repo-local',
+                    snapshotRepo: 'example-repo-local'
                 )
                 rtMavenRun (
                 pom: 'pom.xml',
