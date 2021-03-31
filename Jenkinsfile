@@ -1,7 +1,7 @@
 pipeline {
     agent any   
     environment {
-                    registry = "shilpabains/dockerimage"
+                    registry = "shilpabains/First-web-app"
                     registryCredential = 'DockerHub'
                     dockerImage = ''
                  }
