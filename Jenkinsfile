@@ -62,21 +62,43 @@ pipeline {
                         )
             }
         }
-        stage('Building our image') {
-                        steps{
-                        script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                        }
-                      }
-                   }
-            stage('Deploy our image') {
-                                        steps{
-                                               script {
-                                                            docker.withRegistry( 'https://registry.hub.docker.com', 'DockerHub' ) {
-                                                            dockerImage.push()
-                                                        }
-                                                }            
-                                               }
-                                       }
+        stage('Build Image')
+{
+steps
+{
+bat "docker build -t assignmentdevimage:${BUILD_NUMBER} ."
+}
+}
+        
+stage("Cleaning Previous Deployment"){
+    steps{
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    bat "docker stop assignmentdevcontainer"
+                    bat "docker rm -f assignmentdevcontainer"
+                }
     }
+}
+stage ("Docker Deployment")
+{
+steps
+{
+bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
+}
+}
+stage ('Deploy')
+{
+steps
+{
+deploy adapters: [tomcat7(credentialsId: 'user-tomcat', path: '', url: 'http://localhost:8080/')], contextPath: 'addition', war: '*/.war'
+}
+}
+}
+ post {
+always {
+junit(
+allowEmptyResults: true,
+testResults: '/target/surefire-reports/*.xml'
+)
+}
+ }
 }
