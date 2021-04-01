@@ -85,7 +85,7 @@ pipeline {
         bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
         }
        }
-        [6:12 PM] Anna Mohan
+ 
     
  stage('Pushing the Image')
         {
