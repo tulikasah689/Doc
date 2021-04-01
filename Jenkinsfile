@@ -82,7 +82,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name assignmentdevcontainer -d -p 9055:8080 dock:${BUILD_NUMBER}"
+        bat "docker run --name assignmentdevcontainer -d -p 9056:8080 dock:${BUILD_NUMBER}"
         }
        }
      }
