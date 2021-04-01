@@ -85,13 +85,6 @@ steps
 bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
 }
 }
-stage ('Deploy')
-{
-steps
-{
-deploy adapters: [tomcat7(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080/')], contextPath: 'addition', war: '*/.war'
-}
-}
 }
  post {
 always {
