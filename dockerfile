@@ -6,7 +6,7 @@ FROM tomcat:latest
 LABEL maintainer = "shilpa bains"
 
 # Copy the war file 
-COPY target/first-web-app1.war /usr/local/tomcat/webapps/
+COPY target/first-webapp1.war /usr/local/tomcat/webapps/
 
 #On which port it will run
 EXPOSE 8095
