@@ -89,7 +89,7 @@ stage ('Deploy')
 {
 steps
 {
-deploy adapters: [tomcat7(credentialsId: 'user-tomcat', path: '', url: 'http://localhost:8080/')], contextPath: 'addition', war: '*/.war'
+deploy adapters: [tomcat7(credentialsId: 'tomcat', path: '', url: 'http://localhost:8080/')], contextPath: 'addition', war: '*/.war'
 }
 }
 }
