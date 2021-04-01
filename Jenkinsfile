@@ -85,22 +85,5 @@ pipeline {
         bat "docker run --name assignmentdevcontainer -d -p 9050:8095 dock:${BUILD_NUMBER}"
         }
        }
- 
-    
- stage('Pushing the Image')
-        {
-               steps
-               {
-                  bat "docker login -u shilpabains -p quahfm637320!"
-                  
-                   bat "docker push shilpabains/dock:${BUILD_NUMBER}"
-               }
-           }
-           
-           
-   
-
-
-
      }
     }
