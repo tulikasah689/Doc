@@ -70,20 +70,20 @@ pipeline {
                             }
                     }
 
-stage("Cleaning Previous Deployment"){
-    steps{
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    bat "docker stop assignmentdevcontainer"
-                    bat "docker rm -f assignmentdevcontainer"
-                }
+        stage("Cleaning Previous Deployment"){
+            steps{
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            bat "docker stop assignmentdevcontainer"
+                            bat "docker rm -f assignmentdevcontainer"
+                        }
+            }
+        }
+        stage ("Docker Deployment")
+        {
+        steps
+        {
+        bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
+        }
+       }
+     }
     }
-}
-stage ("Docker Deployment")
-{
-steps
-{
-bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
-}
-}
-}
-}
