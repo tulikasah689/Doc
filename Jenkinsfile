@@ -63,13 +63,13 @@ pipeline {
             }
         }
         stage('Build Image')
-{
-steps
-{
-bat "docker build -t assignmentdevimage:${BUILD_NUMBER} ."
-}
-}
-        
+                    {
+                        steps
+                            {
+                                 bat "docker build -t assignmentdevimage:${BUILD_NUMBER} ."
+                            }
+                    }
+
 stage("Cleaning Previous Deployment"){
     steps{
         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
