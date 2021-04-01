@@ -66,7 +66,7 @@ pipeline {
                     {
                         steps
                             {
-                                 bat "docker build -t assignmentdevimage:${BUILD_NUMBER} ."
+                                 bat "docker build -t dock:${BUILD_NUMBER} ."
                             }
                     }
 
@@ -82,7 +82,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
+        bat "docker run --name assignmentdevcontainer -d -p 9050:8080 dock:${BUILD_NUMBER}"
         }
        }
  
@@ -93,7 +93,7 @@ pipeline {
                {
                   bat "docker login -u shilpabains -p quahfm637320!"
                   
-                   bat "docker push shilpabains/assignmentdevimage:${BUILD_NUMBER}"
+                   bat "docker push shilpabains/dock:${BUILD_NUMBER}"
                }
            }
            
