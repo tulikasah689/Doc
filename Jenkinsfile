@@ -85,5 +85,24 @@ pipeline {
         bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage:${BUILD_NUMBER}"
         }
        }
+        [6:12 PM] Anna Mohan
+    
+ stage('Pushing the Image')
+        {
+               steps
+               {
+                  bat "docker login -u shilpabains -p quahfm637320!"
+                  
+                   bat "docker push shilpabains/dock:${Build_number}"
+               }
+           }
+           
+           
+           
+
+
+
+
+
      }
     }
