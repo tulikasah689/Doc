@@ -86,12 +86,4 @@ bat "docker run --name assignmentdevcontainer -d -p 9050:8080 assignmentdevimage
 }
 }
 }
- post {
-always {
-junit(
-allowEmptyResults: true,
-testResults: '/target/surefire-reports/*.xml'
-)
-}
- }
 }
