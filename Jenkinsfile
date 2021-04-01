@@ -93,14 +93,12 @@ pipeline {
                {
                   bat "docker login -u shilpabains -p quahfm637320!"
                   
-                   bat "docker push shilpabains/assignmentdevimage:${Build_number}"
+                   bat "docker push shilpabains/assignmentdevimage:${BUILD_NUMBER}"
                }
            }
            
            
-           
-
-
+   
 
 
 
