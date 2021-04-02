@@ -1,8 +1,8 @@
 pipeline {
     agent any   
     environment {
-                    registry = "shilpabains/dock"
-                    registryCredential = 'DockerHub'
+                    registry = "tulikasah689/webimage"
+                    registryCredential = 'dockerhub'
                     dockerImage = ''
                  }
     stages {
@@ -10,7 +10,7 @@ pipeline {
         {
             steps
             {
-                git url : "https://github.com/Shilpa40/MavenappSourceCode.git"
+                git url : "https://github.com/tulikasah689/Doc.git"
             }
         }
         stage('Build')
@@ -41,16 +41,16 @@ pipeline {
                 }  
             }
         }
-        stage('Upload to Artifactory')
+         stage('Upload to Artifactory')
         {
             steps
             {
             echo 'Uploading....'
                 rtMavenDeployer (
                     id: 'deployer-unique-id',
-                    serverId: 'Artifactory',
-                    releaseRepo: 'example-repo-local',
-                    snapshotRepo: 'example-repo-local'
+                    serverId: 'artifactory-server',
+                    releaseRepo: 'libs-release-local',
+                    snapshotRepo: 'libs-release-local'
                 )
                 rtMavenRun (
                 pom: 'pom.xml',
@@ -58,7 +58,7 @@ pipeline {
                 deployerId: 'deployer-unique-id'
                 )
                 rtPublishBuildInfo (
-                    serverId: 'Artifactory'
+                    serverId: 'artifactory-server'
                         )
             }
         }
@@ -88,11 +88,11 @@ pipeline {
         stage ("Pushing the image to dockerhub"){
             steps{
                 script{
-                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
-                            bat "docker login -u shilpabains -p quahfm637320!"
-                            bat "docker tag dockima:${BUILD_NUMBER}  shilpabains/dockima:${BUILD_NUMBER}"
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') { 
+                            bat "docker login -u tulikasah689 -p CallmeDK@1011"
+                            bat "docker tag dockima:${BUILD_NUMBER}  tulikasah689/dockima:${BUILD_NUMBER}"
                             bat "docker rmi dockima:${BUILD_NUMBER}"
-                            bat "docker push shilpabains/dockima:${BUILD_NUMBER}"
+                            bat "docker push tulikasah689/dockima:${BUILD_NUMBER}"
                 }
             }
         }    
