@@ -93,5 +93,7 @@ pipeline {
                             bat "docker push shilpabains/dock:dock:${BUILD_NUMBER}"
                 }
             }
-        }     }
-    }
+        }    
+      }
+    }  
+  }
