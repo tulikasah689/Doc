@@ -66,7 +66,7 @@ pipeline {
                     {
                         steps
                             {
-                                 bat "docker build -t dock:${BUILD_NUMBER} ."
+                                 bat "docker build -t dockima:${BUILD_NUMBER} ."
                             }
                     }
 
@@ -82,7 +82,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name assignmentdevcontainer -d -p 9056:8080 dock:${BUILD_NUMBER}"
+        bat "docker run --name assignmentdevcontainer -d -p 9056:8080 dockim:${BUILD_NUMBER}"
         }
        }
         stage ("Pushing the image to dockerhub"){
@@ -90,8 +90,9 @@ pipeline {
                 script{
                         docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
                             bat "docker login -u shilpabains -p quahfm637320!"
-                            bat "docker tag dock:${BUILD_NUMBER}  shilpabains/dock:${BUILD_NUMBER}"
-                            bat "docker push shilpabains/dock:${BUILD_NUMBER}"
+                            bat "docker tag dockim:${BUILD_NUMBER}  shilpabains/dockim:${BUILD_NUMBER}"
+                            bat "docker rmi dockim:${BUILD_NUMBER}"
+                            bat "docker push shilpabains/dockim:${BUILD_NUMBER}"
                 }
             }
         }    
