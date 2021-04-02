@@ -85,5 +85,13 @@ pipeline {
         bat "docker run --name assignmentdevcontainer -d -p 9056:8080 dock:${BUILD_NUMBER}"
         }
        }
-     }
+        stage ("Pushing the image to dockerhub"){
+            steps{
+                script{
+                        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
+                            bat "docker login -u shilpabains -p quahfm637320!"
+                            bat "docker push shilpabains/dock:dock:${BUILD_NUMBER}"
+                }
+            }
+        }     }
     }
