@@ -90,7 +90,8 @@ pipeline {
                 script{
                         docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
                             bat "docker login -u shilpabains -p quahfm637320!"
-                            bat "docker push shilpabains/dock:dock:${BUILD_NUMBER}"
+                            bat "docker tag dock:${BUILD_NUMBER}  shilpabains/dock:${BUILD_NUMBER}"
+                            bat "docker push shilpabains/dock:${BUILD_NUMBER}"
                 }
             }
         }    
