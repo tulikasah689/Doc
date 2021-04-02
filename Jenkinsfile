@@ -5,6 +5,11 @@ pipeline {
                     registryCredential = 'dockerhub'
                     dockerImage = ''
                  }
+    tools
+    {
+        maven  'Maven3'
+        jdk 'JDK_NEW'
+    }
     stages {
         stage('Fetch')
         {
