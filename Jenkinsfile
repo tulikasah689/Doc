@@ -18,24 +18,15 @@ pipeline {
         {
             steps
             {
-                echo 'Hello World'
-        echo 'Building.....'
                 bat 'mvn clean install'
             }
         }
-        stage('Unit Test')
-        {
-            steps
-            {
-        echo 'Testing....'
-                bat 'mvn test'
-            }
-        }
+       
         stage('Sonar Analysis')
         {
             steps
             {
-        echo 'Sonar Analysis....'
+        
                 withSonarQubeEnv("SonarQube")
                 {
                     bat "mvn sonar:sonar"
@@ -46,7 +37,6 @@ pipeline {
         {
             steps
             {
-            echo 'Uploading....'
                 rtMavenDeployer (
                     id: 'deployer-unique-id',
                     serverId: 'artifactory-server',
@@ -79,6 +69,17 @@ pipeline {
                         }
             }
         }
+        stage ("Pushing the image to dockerhub"){
+            steps{
+                script{
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+                            bat "docker tag webimage:${BUILD_NUMBER}  tulikasah689/webimage:${BUILD_NUMBER}"
+                            bat "docker rmi webimage:${BUILD_NUMBER}"
+                            bat "docker push tulikasah689/webimage:${BUILD_NUMBER}"
+                }
+            }
+          }
+        }
         stage ("Docker Deployment")
         {
         steps
@@ -86,17 +87,6 @@ pipeline {
         bat "docker run --name container -d -p 9056:8080 webimage:${BUILD_NUMBER}"
         }
        }
-        stage ("Pushing the image to dockerhub"){
-            steps{
-                script{
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') { 
-                            bat "docker login -u tulikasah689 -p CallmeDK@1011"
-                            bat "docker tag webimage:${BUILD_NUMBER}  tulikasah689/webimage:${BUILD_NUMBER}"
-                            bat "docker rmi webimage:${BUILD_NUMBER}"
-                            bat "docker push tulikasah689/webimage:${BUILD_NUMBER}"
-                }
-            }
-        }    
-      }
+       
     }  
   }
