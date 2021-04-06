@@ -1,5 +1,10 @@
 pipeline {
-    agent any   
+    agent any 
+    environment {
+        registry = "tulikasah689/webimage"
+        registryCredential = 'dockerhub'
+        dockerImage = ''
+}
    
     tools
     {
