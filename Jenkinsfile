@@ -1,11 +1,11 @@
 pipeline {
-    agent any 
+     
     environment {
         registry = "tulikasah689/webimage"
         registryCredential = 'dockerhub'
         dockerImage = ''
 }
-   
+   agent any
     tools
     {
         maven  'Maven3'
