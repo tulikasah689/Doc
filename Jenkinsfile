@@ -1,10 +1,5 @@
 pipeline {
      
-    environment {
-        registry = "tulikasah689/webimage"
-        registryCredential = 'dockerhub'
-        dockerImage = ''
-}
    agent any
     tools
     {
@@ -89,7 +84,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name container -d -p 9056:8080 webimage:${BUILD_NUMBER}"
+        bat "docker run --name container -d -p 9056:8080 tulikasah689/webimage:${BUILD_NUMBER}"
         }
        }
        
