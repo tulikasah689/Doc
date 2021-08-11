@@ -84,7 +84,7 @@ pipeline {
         {
         steps
         {
-        bat "docker run --name container -d -p 9055:8080 tulikasah689/webimage:${BUILD_NUMBER}"
+        bat "docker run --name container -d -p 9056:8080 tulikasah689/webimage:${BUILD_NUMBER}"
         }
        }
        
